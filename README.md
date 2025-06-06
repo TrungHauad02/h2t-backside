@@ -1,683 +1,858 @@
+# 🎓 H2T-English Backend 🚀
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Spring%20Boot-3.2+-brightgreen?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Boot"/>
+  <img src="https://img.shields.io/badge/Java-17+-orange?style=for-the-badge&logo=java&logoColor=white" alt="Java"/>
+  <img src="https://img.shields.io/badge/MySQL-8.0+-blue?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
+  <img src="https://img.shields.io/badge/AI-Integrated-purple?style=for-the-badge&logo=openai&logoColor=white" alt="AI"/>
+</div>
+
+---
+
+## 📋 Giới thiệu dự án
+
+**H2T-English** là một hệ thống backend cho website học tập tiếng Anh tích hợp AI đánh giá kết quả học tập, được phát triển bằng Spring Boot. Dự án này là luận văn tốt nghiệp ngành Công nghệ Thông tin tại **Trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh (HCMUTE)**.
+
+### 🎯 Mục tiêu dự án
+- 🌐 Xây dựng một nền tảng học tập tiếng Anh toàn diện
+- 🤖 Tích hợp AI để đánh giá tự động kỹ năng viết và nói
+- 👥 Cung cấp hệ thống quản lý học tập có phân quyền rõ ràng
+- 📊 Hỗ trợ các bài kiểm tra TOEIC chuẩn quốc tế
+
+---
+
+## 📑 Mục lục
+
 <div align="center">
 
-# 🌟 H2T English - Backend 🌟
-
-<p align="center">
-  <a href="https://spring.io/projects/spring-boot"><img src="https://img.shields.io/badge/Spring_Boot-3.4.1-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot"></a>
-  <a href="https://www.java.com/"><img src="https://img.shields.io/badge/Java-18-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java"></a>
-  <a href="https://www.mysql.com/"><img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"></a>
-  <a href="https://jwt.io/"><img src="https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white" alt="JWT"></a>
-  <a href="https://redis.io/"><img src="https://img.shields.io/badge/Redis-Caching-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis"></a>
-</p>
-
-<p align="center">
-  <em>A comprehensive RESTful API backend powering the H2T English learning platform with secure authentication, content management, and advanced assessment capabilities</em>
-</p>
-
-<img src="https://cdn-icons-png.flaticon.com/512/8661/8661468.png" alt="H2T English Backend" height="200px" width="200px" style="margin: 20px 0;">
+| 📖 Phần | 🔗 Liên kết |
+|---------|-------------|
+| 📋 Giới thiệu dự án | [#-giới-thiệu-dự-án](#-giới-thiệu-dự-án) |
+| 👥 Thông tin nhóm | [#-thông-tin-nhóm-thực-hiện](#-thông-tin-nhóm-thực-hiện) |
+| ✨ Tính năng chính | [#-tính-năng-chính](#-tính-năng-chính) |
+| 🛠️ Công nghệ | [#️-công-nghệ-sử-dụng](#️-công-nghệ-sử-dụng) |
+| 🚀 Cài đặt & Chạy | [#-cài-đặt-và-chạy-dự-án](#-cài-đặt-và-chạy-dự-án) |
+| 🏗️ Cấu trúc dự án | [#️-cấu-trúc-dự-án](#️-cấu-trúc-dự-án) |
+| 📚 API Endpoints | [#-api-endpoints-theo-controller](#-api-endpoints-theo-controller) |
+| 🔒 Xác thực | [#-xác-thực-và-phân-quyền](#-xác-thực-và-phân-quyền) |
+| 🛡️ Xử lý lỗi | [#️-hệ-thống-xử-lý-lỗi](#️-hệ-thống-xử-lý-lỗi) |
+| 🗄️ Database | [#️-cấu-trúc-database](#️-cấu-trúc-database) |
+| 📈 Performance | [#-hiệu-suất-và-khả-năng-mở-rộng](#-hiệu-suất-và-khả-năng-mở-rộng) |
+| 🧪 Testing | [#-testing-và-documentation](#-testing-và-documentation) |
 
 </div>
 
-## 📖 Table of Contents
+---
 
-- [🌟 H2T English - Backend 🌟](#-h2t-english---backend-)
-    - [📖 Table of Contents](#-table-of-contents)
-    - [🚀 Features](#-features)
-        - [👤 User Management and Authentication](#-user-management-and-authentication)
-        - [🔑 Security](#-security)
-        - [📚 Educational Content Management](#-educational-content-management)
-        - [🧠 Speech and Text Processing](#-speech-and-text-processing)
-        - [📊 Assessment Engine](#-assessment-engine)
-        - [📝 TOEIC Preparation](#-toeic-preparation)
-        - [🛣️ Learning Route Management](#️-learning-route-management)
-    - [💻 Technology Stack](#-technology-stack)
-        - [Core Framework](#core-framework)
-        - [Security](#security)
-        - [Data Access](#data-access)
-        - [Speech and Text Processing](#speech-and-text-processing)
-        - [Documentation and Validation](#documentation-and-validation)
-        - [Utilities](#utilities)
-    - [🏁 API Endpoints](#-api-endpoints)
-        - [Authentication and User Management](#authentication-and-user-management)
-        - [Learning Content](#learning-content)
-        - [Tests and Assessments](#tests-and-assessments)
-        - [Speech and Text Processing](#speech-and-text-processing-1)
-        - [Learning Routes](#learning-routes)
-    - [📂 Project Structure](#-project-structure)
-    - [🏛️ Database Schema](#️-database-schema)
-        - [Core Entities](#core-entities)
-        - [Educational Content](#educational-content)
-        - [Assessment](#assessment)
-        - [Routes and Progress](#routes-and-progress)
-    - [🔒 Security Implementation](#-security-implementation)
-        - [Authentication Flow](#authentication-flow)
-        - [Role-Based Access Control](#role-based-access-control)
-        - [Token Management](#token-management)
-    - [⚙️ Error Handling](#️-error-handling)
-        - [Global Exception Handling](#global-exception-handling)
-        - [Standardized Response Format](#standardized-response-format)
-        - [Error Logging](#error-logging)
-    - [🏗️ Getting Started](#️-getting-started)
-        - [Prerequisites](#prerequisites)
-        - [Installation](#installation)
-        - [Configuration](#configuration)
-        - [Running the Application](#running-the-application)
-    - [📚 API Documentation](#-api-documentation)
-    - [👨‍🎓 Team](#-team)
+## 👥 Thông tin nhóm thực hiện
 
-## 🚀 Features
+<div align="center">
 
-### 👤 User Management and Authentication
+### 🎓 **Luận văn tốt nghiệp HCMUTE** 🏫
 
-- **JWT-based Authentication**: Secure token-based authentication system
-- **OAuth2 Integration**: Support for Google authentication
-- **Refresh Token Mechanism**: Enhanced session management with secure token rotation
-- **Password Reset**: Email-based password recovery with OTP verification
-- **Profile Management**: Comprehensive user data handling with CRUD operations
+<table>
+<tr>
+<td align="center">
+<img src="https://avatars.githubusercontent.com/u/97101001?s=400&u=c2e995d2acff0cb120417bf042d6c1205bd4bbb4&v=4" width="100px;" alt="Nguyễn Trung Hậu"/><br />
+<b>👑 Nguyễn Trung Hậu</b><br />
+<sub>🆔 21110434</sub><br />
+<sub>💻 Backend Developer</sub><br />
+<sub>🏆 Trưởng nhóm</sub>
+</td>
+<td align="center">
+<img src="https://avatars.githubusercontent.com/u/113422566?v=4" width="100px;" alt="Cáp Lê Hữu Tân"/><br />
+<b>👨‍💻 Cáp Lê Hữu Tân</b><br />
+<sub>🆔 21110920</sub><br />
+<sub>💻 Backend Developer</sub>
+</td>
+<td align="center">
+<img src="https://avatars.githubusercontent.com/u/123963752?s=400&u=c2e995d2acff0cb120417bf042d6c1205bd4bbb4&v=4" width="100px;" alt="Thái Thanh Hưng"/><br />
+<b>👨‍💻 Thái Thanh Hưng</b><br />
+<sub>🆔 21110487</sub><br />
+<sub>💻 Backend Developer</sub>
+</td>
+</tr>
+</table>
 
-### 🔑 Security
+📖 **Đề tài:** Thiết kế và xây dựng website học tập tiếng anh tích hợp AI đánh giá kết quả học tập
 
-- **Role-Based Authorization**: Fine-grained access control for different user roles (Student, Teacher, Admin)
-- **Secure Password Storage**: Password encryption using Spring Security's BCrypt encoder
-- **Token Blacklisting**: Protection against compromised tokens via Redis-based blacklist
-- **Input Validation**: Request validation using Jakarta Validation framework
-- **Secure Headers**: Implementation of security headers for protection against common web vulnerabilities
+</div>
 
-### 📚 Educational Content Management
+---
 
-- **Diverse Learning Materials**: Support for various types of educational content:
-    - Grammar lessons
-    - Vocabulary topics
-    - Reading materials
-    - Listening exercises
-    - Speaking practice
-    - Writing activities
-- **Lesson Questions and Answers**: Structured format for interactive learning materials
-- **Preparation Activities**: Support for different types of preparation exercises:
-    - Word-sentence matching
-    - Word classification
-    - Sentence construction
+## ✨ Tính năng chính
 
-### 🧠 Speech and Text Processing
+### 🤖 Tính năng AI
+- 📝 **Chấm điểm bài viết tự động** - Sử dụng AI để đánh giá văn phong, ngữ pháp và từ vựng
+- 🗣️ **Chấm điểm bài nói tự động** - Phân tích phát âm, độ trôi chảy và độ chính xác
+- 🔊 **Text-to-Speech** - Chuyển đổi văn bản thành giọng nói tự nhiên
+- 📊 **Quản lý phản hồi AI** - Hệ thống đánh giá và quản lý kết quả AI
 
-- **Text-to-Speech Conversion**: Convert text to natural-sounding speech
-- **Speech-to-Text Processing**: Transcribe spoken language to text
-- **Voice Variety**: Support for different voices and speech styles
-- **Audio File Handling**: Process uploaded audio files for transcription
+### 🎓 Hệ thống học tập
+- 🗺️ **Lộ trình học có cấu trúc** - Từ cơ bản đến nâng cao
+- 📚 **Bài học đa dạng** - Từ vựng, ngữ pháp, nghe, nói, đọc, viết
+- ✅ **Bài kiểm tra kỹ năng** - Đánh giá từng kỹ năng riêng biệt
+- 🏆 **Bài thi TOEIC** - Luyện thi TOEIC chuẩn quốc tế
+- 🥇 **Bài thi thi đấu** - Có bảng xếp hạng cho người học
 
-### 📊 Assessment Engine
+### 👤 Hệ thống phân quyền
 
-- **Comprehensive Testing System**: Support for different types of assessments:
-    - Mixed skill tests
-    - Reading tests
-    - Listening tests
-    - Speaking tests
-    - Writing tests
-- **Question Management**: Flexible question and answer handling
-- **Answer Submission**: Record and evaluate user test submissions
-- **Performance Analytics**: Track and analyze user test performance
+<div align="center">
 
-### 📝 TOEIC Preparation
+| Vai trò | Icon | Quyền hạn |
+|---------|------|-----------|
+| 🟢 **Học sinh** (STUDENT) | 📖 | Truy cập lộ trình học, làm bài kiểm tra, quản lý thông tin cá nhân |
+| 🟡 **Giáo viên** (TEACHER) | 👨‍🏫 | Quản lý lộ trình học, tạo bài học, quản lý bài kiểm tra |
+| 🟠 **Giáo viên nâng cao** (TEACHER_ADVANCE) | 👨‍🔬 | Quản lý bài thi TOEIC, đánh giá kết quả AI + quyền giáo viên |
+| 🔴 **Admin** (ADMIN) | 👨‍💼 | Quản lý toàn hệ thống, người dùng, error logs |
 
-- **Full TOEIC Structure**: Complete implementation of all TOEIC test parts:
-    - Part 1: Photographs
-    - Part 2: Question-Response
-    - Parts 3 & 4: Conversations and Talks
-    - Part 5: Incomplete Sentences
-    - Part 6: Text Completion
-    - Part 7: Reading Comprehension
-- **Score Tracking**: Record and analyze TOEIC test attempts
-- **Competitive Testing**: Timed competition tests with rankings
+</div>
 
-### 🛣️ Learning Route Management
+### 🛡️ Tính năng bảo mật và xử lý lỗi
+- 🚨 **Xử lý lỗi thông minh** - Tự động tạo error log và gửi thông báo Discord
+- 🔐 **JWT Authentication** - Bảo mật với access token và refresh token
+- 🔑 **Phân quyền chi tiết** - Kiểm soát truy cập theo vai trò
+- 🌐 **CORS Configuration** - Cấu hình bảo mật cho frontend
 
-- **Custom Learning Paths**: Create and manage educational routes
-- **Route Nodes**: Organize different content types within learning routes
-- **Sequenced Learning**: Structure content in progressive learning sequences
+---
 
-## 💻 Technology Stack
+## 🛠️ Công nghệ sử dụng
 
-### Core Framework
-- **Spring Boot 3.4.1**: Modern, production-ready framework for building stand-alone applications
-- **Java 18**: Latest Java features for enhanced development
-- **Spring MVC**: Web layer implementation with REST controllers
-- **Spring Data**: Data access abstraction
+### 💼 Framework Backend
+<div align="center">
+<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Boot"/>
+<img src="https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" alt="Spring Security"/>
+<img src="https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Data JPA"/>
+</div>
 
-### Security
-- **Spring Security**: Comprehensive security framework
-- **Nimbus JOSE JWT (9.37.2)**: JWT implementation for token-based authentication
-- **OAuth2 Client**: Authentication with third-party providers (Google)
-- **Spring Security Crypto**: Cryptographic utilities
+- 🚀 **Spring Boot** - Framework chính
+- 🛡️ **Spring Security** - Bảo mật và xác thực
+- 💾 **Spring Data JPA** - ORM và truy cập database
+- ✅ **Spring Validation** - Validation dữ liệu
 
-### Data Access
-- **Spring Data JPA**: JPA-based repositories
-- **Spring Data JDBC**: Low-level database access
-- **MySQL Connector (8.0.33)**: Database connectivity
-- **Spring Data Redis**: Caching and token blacklisting
+### 🗄️ Database & Storage
+<div align="center">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
+<img src="https://img.shields.io/badge/MinIO-C72E29?style=for-the-badge&logo=minio&logoColor=white" alt="MinIO"/>
+</div>
 
-### Speech and Text Processing
-- **Spring Mail**: Email service for OTP and notifications
-- **Text-to-Speech API Integration**: Convert text to speech
-- **Speech-to-Text API Integration**: Transcribe audio to text
+- 🐬 **MySQL 8** - Database chính
+- 📁 **MinIO** - Object storage cho file
 
-### Documentation and Validation
-- **Jakarta Validation**: Input validation framework
-- **Spring Boot Starter Validation**: Validation infrastructure
-- **MapStruct (1.6.3)**: Object mapping between DTOs and entities
+### 🔐 Bảo mật & Xác thực
+<div align="center">
+<img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT"/>
+</div>
 
-### Utilities
-- **Lombok (1.18.36)**: Reduce boilerplate code
-- **Jackson Datatype JSR310 (2.18.2)**: Java 8 date/time serialization
-- **Spring DevTools**: Development productivity tools
+- 🎫 **JWT (Nimbus JOSE)** - Token-based authentication
+- 🔒 **BCrypt** - Hash password
 
-## 🏁 API Endpoints
+### 🌐 APIs bên ngoài
+<div align="center">
+<img src="https://custom-icon-badges.demolab.com/badge/Deepseek-4D6BFF?logo=deepseek&logoColor=white" alt="DeepSeek" height="30"/>
+<img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" height="30"/>
+</div>
 
-The H2T English backend provides a comprehensive set of RESTful endpoints organized by functionality.
+- 🧠 **OpenRouter** - LLM API cho tính năng AI
+- 🔑 **Google OAuth** - Đăng nhập Google
+- 📧 **Email Service** - Gửi email xác thực
 
-### Authentication and User Management
+### 📚 Documentation & Development
+<div align="center">
+<img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger"/>
+<img src="https://img.shields.io/badge/MapStruct-E97627?style=for-the-badge&logo=java&logoColor=white" alt="MapStruct"/>
+<img src="https://img.shields.io/badge/Lombok-BC4A32?style=for-the-badge&logo=lombok&logoColor=white" alt="Lombok"/>
+</div>
 
-- **Authentication**:
-    - `POST /api/auth/login`: Authenticate user and get access token
-    - `POST /api/auth/login/google`: Login with Google OAuth
-    - `POST /api/auth/logout`: Logout and invalidate token
-    - `GET /api/auth/validate`: Validate access token
-    - `POST /api/auth/refresh-token`: Refresh access token
+- 📖 **Swagger/OpenAPI** - Tài liệu API
+- 🔄 **MapStruct** - Object mapping
+- 🧹 **Lombok** - Giảm boilerplate code
 
-- **User Management**:
-    - `GET /api/users/{id}`: Get user by ID
-    - `POST /api/users`: Create new user
-    - `PUT /api/users/{id}`: Update user
-    - `PATCH /api/users/{id}`: Partial update user
-    - `DELETE /api/users/{id}`: Delete user
-    - `GET /api/users`: Search users with filters
+---
 
-- **Password Management**:
-    - `POST /api/users/send-otp`: Send OTP for password reset
-    - `POST /api/users/verify-otp`: Verify OTP code
-    - `POST /api/users/reset-password`: Reset password with verified OTP
+## 🚀 Cài đặt và chạy dự án
 
-### Learning Content
+### 📋 Yêu cầu hệ thống
+<div align="center">
+<img src="https://img.shields.io/badge/Java-17+-orange?style=for-the-badge&logo=java&logoColor=white" alt="Java"/>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
+<img src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven"/>
+</div>
 
-- **Grammar**:
-    - `GET /api/grammars/{id}`: Get grammar by ID
-    - `POST /api/grammars`: Create grammar
-    - `PUT /api/grammars/{id}`: Update grammar
-    - `DELETE /api/grammars/{id}`: Delete grammar
-    - `GET /api/grammars`: Get grammars with filters
-    - `GET /api/grammars/questions`: Get questions for a grammar
+### 🐳 1. Khởi tạo các container cần thiết
 
-- **Vocabulary**:
-    - `GET /api/vocabularies/{id}`: Get vocabulary by ID
-    - `POST /api/vocabularies`: Create vocabulary
-    - `PUT /api/vocabularies/{id}`: Update vocabulary
-    - `DELETE /api/vocabularies/{id}`: Delete vocabulary
-    - `GET /api/vocabularies`: Get vocabularies with filters by topic
+```bash
+# 🐬 MySQL Database
+docker run --detach \
+  --env MYSQL_ROOT_PASSWORD=123456 \
+  --env MYSQL_USER=study-english \
+  --env MYSQL_PASSWORD=123456 \
+  --env MYSQL_DATABASE=study-english \
+  --name mysql \
+  --publish 3307:3306 \
+  mysql:8-oracle
 
-- **Topics**:
-    - `GET /api/topics/{id}`: Get topic by ID
-    - `POST /api/topics`: Create topic
-    - `PUT /api/topics/{id}`: Update topic
-    - `DELETE /api/topics/{id}`: Delete topic
-    - `GET /api/topics`: Get topics with filters
-    - `GET /api/topics/questions`: Get questions for a topic
+# 📝 LanguageTool (Kiểm tra ngữ pháp)
+docker run -d -p 8081:8010 erikvl87/languagetool
 
-- **Reading**:
-    - `GET /api/readings/{id}`: Get reading by ID
-    - `POST /api/readings`: Create reading
-    - `PUT /api/readings/{id}`: Update reading
-    - `DELETE /api/readings/{id}`: Delete reading
-    - `GET /api/readings`: Get readings with filters
-    - `GET /api/readings/questions`: Get questions for a reading
+# 🎤 Vosk (Speech-to-Text)
+docker run -d -p 7860:7860 trunghauad02/speech-evaluation-app
 
-- **Listening**:
-    - `GET /api/listenings/{id}`: Get listening by ID
-    - `POST /api/listenings`: Create listening
-    - `PUT /api/listenings/{id}`: Update listening
-    - `DELETE /api/listenings/{id}`: Delete listening
-    - `GET /api/listenings`: Get listenings with filters
-    - `GET /api/listenings/questions`: Get questions for a listening
-
-- **Speaking**:
-    - `GET /api/speakings/{id}`: Get speaking by ID
-    - `POST /api/speakings`: Create speaking
-    - `PUT /api/speakings/{id}`: Update speaking
-    - `DELETE /api/speakings/{id}`: Delete speaking
-    - `GET /api/speakings`: Get speakings with filters
-
-- **Writing**:
-    - `GET /api/writings/{id}`: Get writing by ID
-    - `POST /api/writings`: Create writing
-    - `PUT /api/writings/{id}`: Update writing
-    - `DELETE /api/writings/{id}`: Delete writing
-    - `GET /api/writings`: Get writings with filters
-
-### Tests and Assessments
-
-- **Regular Tests**:
-    - `GET /api/tests/{id}`: Get test by ID
-    - `POST /api/tests`: Create test
-    - `PUT /api/tests/{id}`: Update test
-    - `DELETE /api/tests/{id}`: Delete test
-    - `GET /api/tests`: Get tests with filters
-
-- **Competition Tests**:
-    - `GET /api/competition-tests/{id}`: Get competition test by ID
-    - `POST /api/competition-tests`: Create competition test
-    - `PUT /api/competition-tests/{id}`: Update competition test
-    - `DELETE /api/competition-tests/{id}`: Delete competition test
-    - `GET /api/competition-tests`: Get competition tests with filters
-
-- **TOEIC Tests**:
-    - `GET /api/toeic/{id}`: Get TOEIC test by ID
-    - `POST /api/toeic`: Create TOEIC test
-    - `PUT /api/toeic/{id}`: Update TOEIC test
-    - `DELETE /api/toeic/{id}`: Delete TOEIC test
-    - `GET /api/toeic`: Get TOEIC tests with filters
-
-- **Test Submissions**:
-    - `POST /api/submit-tests`: Submit test
-    - `GET /api/submit-tests/{id}`: Get test submission
-    - `GET /api/submit-tests/stats`: Get test submission statistics
-
-### Speech and Text Processing
-
-- **Text-to-Speech**:
-    - `GET /api/text-to-speech/convert`: Convert text to speech audio
-    - `GET /api/text-to-speech/voices`: Get available voices
-
-- **Speech-to-Text**:
-    - `POST /api/speech-to-text/convert`: Convert speech audio to text
-    - `POST /api/speech-to-text/convert-base64`: Convert base64 encoded audio to text
-
-### Learning Routes
-
-- **Routes**:
-    - `GET /api/routes/{id}`: Get route by ID
-    - `POST /api/routes`: Create route
-    - `PUT /api/routes/{id}`: Update route
-    - `DELETE /api/routes/{id}`: Delete route
-    - `GET /api/routes`: Get routes by owner ID with filters
-
-- **Route Nodes**:
-    - `GET /api/routeNodes/{id}`: Get route node by ID
-    - `POST /api/routeNodes`: Create route node
-    - `PUT /api/routeNodes/{id}`: Update route node
-    - `DELETE /api/routeNodes/{id}`: Delete route node
-
-## 📂 Project Structure
-
-The project follows a well-organized layered architecture based on Spring Boot best practices:
-
-```
-src/
-├── main/
-│   ├── java/
-│   │   └── com/
-│   │       └── englishweb/
-│   │           └── h2t_backside/
-│   │               ├── config/                # Application configuration
-│   │               ├── controller/            # REST controllers
-│   │               │   ├── lesson/            # Controllers for educational content
-│   │               │   └── test/              # Controllers for assessments
-│   │               ├── dto/                   # Data transfer objects
-│   │               │   ├── enumdto/           # Enum DTOs
-│   │               │   ├── filter/            # Filter DTOs
-│   │               │   ├── lesson/            # Lesson DTOs
-│   │               │   ├── response/          # Response DTOs
-│   │               │   ├── security/          # Security DTOs
-│   │               │   └── test/              # Test DTOs
-│   │               ├── exception/             # Custom exceptions
-│   │               ├── mapper/                # MapStruct mappers
-│   │               ├── model/                 # Domain models
-│   │               │   ├── abstractmodel/     # Abstract base models
-│   │               │   ├── enummodel/         # Enum models
-│   │               │   ├── features/          # Special feature models
-│   │               │   ├── interfacemodel/    # Model interfaces
-│   │               │   ├── lesson/            # Educational content models
-│   │               │   ├── log/               # Logging models
-│   │               │   └── test/              # Assessment models
-│   │               ├── repository/            # Data repositories
-│   │               ├── security/              # Security configuration
-│   │               ├── service/               # Business logic
-│   │               │   ├── feature/           # Feature services
-│   │               │   ├── impl/              # Service implementations
-│   │               │   ├── lesson/            # Lesson services
-│   │               │   └── test/              # Test services
-│   │               ├── util/                  # Utility classes
-│   │               └── H2tBacksideApplication.java  # Application entry point
-│   └── resources/
-│       ├── application.properties             # Application properties
-│       ├── application-dev.properties         # Development properties
-│       └── application-prod.properties        # Production properties
-└── test/                                      # Test files
-    └── java/
-        └── com/
-            └── englishweb/
-                └── h2t_backside/               # Test classes
+# 🔊 Kokoro (Text-to-Speech)
+docker run -p 8880:8880 ghcr.io/remsky/kokoro-fastapi-cpu:latest
 ```
 
-## 🏛️ Database Schema
+### ⚙️ 2. Cấu hình biến môi trường
 
-The H2T English backend utilizes a comprehensive database schema designed to support all educational and assessment features.
-
-### Core Entities
-
-- **User**: Central entity for user management with role-based access control
-    - Attributes: id, name, email, password, avatar, role, level, phoneNumber, dateOfBirth, refreshToken
-    - Relations: One-to-many with Route, SubmitTest, SubmitToeic, SubmitCompetition
-
-- **AbstractBaseEntity**: Base class for all entities
-    - Attributes: id, status, createdAt, updatedAt
-
-- **ErrorLog**: Records system errors for monitoring
-    - Attributes: id, message, errorCode, timestamp
-
-- **UpdateLog**: Tracks entity changes for auditing
-    - Attributes: id, userId, targetId, targetTable, timestamp, action
-
-### Educational Content
-
-- **AbstractLessonEntity**: Base class for educational content
-    - Attributes: title, image, description, views, routeNodeId
-
-- **Grammar**: Grammar lessons with definitions and examples
-    - Attributes: file, definition, example, tips, questions
-
-- **Topic**: Vocabulary topic containers
-    - Attributes: questions
-    - Relations: One-to-many with Vocabulary
-
-- **Vocabulary**: Individual vocabulary items
-    - Attributes: example, image, word, meaning, phonetic, wordType, topicId
-
-- **Reading**: Reading comprehension materials
-    - Attributes: file, questions, preparationId
-
-- **Listening**: Listening exercises with audio files
-    - Attributes: audio, transcript, questions, preparationId
-
-- **Speaking**: Speaking practice activities
-    - Attributes: topic, duration, preparationId
-    - Relations: One-to-many with SpeakingConversation
-
-- **Writing**: Writing exercises
-    - Attributes: topic, file, paragraph, preparationId, tips
-    - Relations: One-to-many with WritingAnswer
-
-- **Preparation**: Preparatory activities for lessons
-    - Attributes: title, tip, questions, type
-
-### Assessment
-
-- **Test**: Base test entity
-    - Attributes: title, description, duration, type, parts
-
-- **CompetitionTest**: Competition-based assessments
-    - Attributes: title, duration, startTime, endTime, parts
-
-- **Toeic**: TOEIC test structure
-    - Attributes: title, duration, questionsPart1-7
-
-- **Question**: General question entity
-    - Attributes: content, explanation
-    - Relations: One-to-many with Answer
-
-- **Answer**: Answer options for questions
-    - Attributes: content, correct, questionId
-
-- **SubmitTest**: Records test submissions
-    - Attributes: score, userId, testId, comment
-
-- **SubmitToeic**: Records TOEIC test submissions
-    - Attributes: score, comment, toeicId, userId
-
-- **SubmitCompetition**: Records competition submissions
-    - Attributes: score, userId, testId
-
-### Routes and Progress
-
-- **Route**: Learning pathways
-    - Attributes: title, image, description, ownerId
-    - Relations: One-to-many with RouteNode
-
-- **RouteNode**: Node in a learning route
-    - Attributes: nodeId, type, serial, routeId
-
-## 🔒 Security Implementation
-
-The H2T English backend employs a robust, multi-layered security approach.
-
-### Authentication Flow
-
-1. **Initial Authentication**:
-    - User submits credentials via `/api/auth/login` or OAuth via `/api/auth/login/google`
-    - System validates credentials and generates access and refresh tokens
-    - Tokens are returned to the client in `AuthenticateDTO`
-
-2. **Access Token Usage**:
-    - Client includes access token in `Authorization` header for secure endpoints
-    - Token is validated via JwtUtil for each request
-    - Token expiration is checked
-
-3. **Token Refresh**:
-    - When access token expires, client uses refresh token to request a new one
-    - Refresh token is validated and a new access token is issued
-    - Original refresh token can be maintained or rotated based on security policy
-
-4. **Logout Process**:
-    - Client sends refresh token to `/api/auth/logout`
-    - Token is invalidated and added to blacklist in Redis
-    - Any further attempts to use the token are rejected
-
-### Role-Based Access Control
-
-- **Student**: Basic access to learning materials and tests
-- **Teacher**: Content creation and management capabilities
-- **Teacher Admin**: Extended teaching capabilities and moderation
-- **Admin**: Full system access and administration
-
-### Token Management
-
-- **Access Tokens**: Short-lived JWTs for API access
-- **Refresh Tokens**: Longer-lived tokens stored in database for session management
-- **Blacklisting**: Revoked tokens tracked in Redis to prevent reuse
-- **Token Validation**: Comprehensive validation including signature, expiration, and blacklist check
-
-## ⚙️ Error Handling
-
-The H2T English backend implements a comprehensive error handling strategy to ensure smooth operation and debugging.
-
-### Global Exception Handling
-
-The system utilizes Spring's `@ControllerAdvice` and `@ExceptionHandler` mechanisms to centrally manage exceptions:
-
-- **Custom Exceptions**: Domain-specific exceptions with meaningful messages
-- **Validation Exceptions**: Specialized handling for input validation failures
-- **Security Exceptions**: Authentication and authorization failure handling
-- **Runtime Exceptions**: Graceful handling of unexpected errors
-
-### Standardized Response Format
-
-All API responses follow a consistent format using `ResponseDTO`:
-
-```java
-public class ResponseDTO<T> {
-    private ResponseStatusEnum status;  // SUCCESS or FAIL
-    private String message;             // Human-readable message
-    private T data;                     // Response payload (when successful)
-}
-```
-
-This ensures that clients receive consistent error information regardless of the error type.
-
-### Error Logging
-
-The system maintains detailed error logs for monitoring and debugging:
-
-- **Error Log Entity**: Persists error details to database
-- **Structured Logging**: Uses SLF4J with structured log formats
-- **Log Levels**: Appropriate log levels for different severity errors
-- **Contextual Information**: Includes request context for debugging
-
-## 🏗️ Getting Started
-
-### Prerequisites
-
-- **Java Development Kit (JDK) 18** or higher
-- **Maven 3.6** or higher
-- **MySQL 8.0** or higher
-- **Redis** server (for caching and token management)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-organization/h2t-backside.git
-   cd h2t-backside
-   ```
-
-2. Build the project:
-   ```bash
-   mvn clean install
-   ```
-
-### Configuration
-
-Configure your application in `src/main/resources/application.properties`:
+Tạo file `application.properties` và thay thế các giá trị **[THAY_ĐỔI_TẠI_ĐÂY]** bằng thông tin thật:
 
 ```properties
-# Server Configuration
-server.port=8080
-server.servlet.context-path=/api/v1
+# 📱 Thông tin ứng dụng
+spring.application.name=h2t-backside
 
-# Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/h2t_english
-spring.datasource.username=your_mysql_username
-spring.datasource.password=your_mysql_password
+# 🗄️ Cấu hình Database
+spring.datasource.url=jdbc:mysql://localhost:3307/study-english
+spring.datasource.username=root
+spring.datasource.password=123456
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
-# Security Configuration
-security.jwt.secret=your_jwt_secret_key
-security.jwt.expiration=3600000
-security.jwt.refresh.expiration=86400000
+# 🎫 Cấu hình JWT
+jwt.signerkey=[THAY_ĐỔI_JWT_SECRET_KEY_TẠI_ĐÂY]
+security.jwt.expiration.access=86400000
+security.jwt.expiration.refresh=2592000000
 
-# OAuth2 Configuration
-spring.security.oauth2.client.registration.google.client-id=your_google_client_id
-spring.security.oauth2.client.registration.google.client-secret=your_google_client_secret
-
-# Redis Configuration
-spring.redis.host=localhost
-spring.redis.port=6379
-
-# Email Configuration
+# 📧 Cấu hình Email
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
-spring.mail.username=your_email@gmail.com
-spring.mail.password=your_app_password
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.username=[THAY_ĐỔI_EMAIL_TẠI_ĐÂY]
+spring.mail.password=[THAY_ĐỔI_APP_PASSWORD_TẠI_ĐÂY]
+
+# 📁 Cấu hình MinIO
+minio.endpoint=http://138.2.91.94:9000
+minio.accessKey=[THAY_ĐỔI_MINIO_ACCESS_KEY_TẠI_ĐÂY]
+minio.secretKey=[THAY_ĐỔI_MINIO_SECRET_KEY_TẠI_ĐÂY]
+minio.bucketName=h2t-english
+
+# 🧠 OpenRouter (LLM)
+openrouter.api.key=[THAY_ĐỔI_OPENROUTER_API_KEY_TẠI_ĐÂY]
+openrouter.api.url=https://openrouter.ai/api/v1/chat/completions
+openrouter.model=deepseek/deepseek-chat-v3-0324:free
+
+# 🔑 Google OAuth
+gg_client_id=[THAY_ĐỔI_GOOGLE_CLIENT_ID_TẠI_ĐÂY]
+gg_client_secret_id=[THAY_ĐỔI_GOOGLE_CLIENT_SECRET_TẠI_ĐÂY]
+
+# 🔊 Text-to-Speech
+tts.api.url=http://localhost:8880/v1/audio
+tts.voice.audio.directory=./voiceAudio
+
+# 🎤 Speech-to-Text
+vosk.api.url=http://localhost:7860/api
+
+# 💬 Quote API
+quote.api.url=https://api.api-ninjas.com/v1/quotes
+quote.api.key=[THAY_ĐỔI_QUOTE_API_KEY_TẠI_ĐÂY]
+
+# 🚨 Discord Webhook
+discord.webhook.url=[THAY_ĐỔI_DISCORD_WEBHOOK_URL_TẠI_ĐÂY]
+
+# 📤 Cấu hình File Upload
+spring.servlet.multipart.max-file-size=50MB
+spring.servlet.multipart.max-request-size=50MB
+server.tomcat.connection-timeout=300000ms
 ```
 
-### Running the Application
+### 🏃‍♂️ 3. Chạy ứng dụng
 
 ```bash
-# Development mode
-mvn spring-boot:run -Dspring-boot.run.profiles=dev
+# 📥 Clone repository
+git clone <repository-url>
+cd h2t-english-backend
 
-# Production mode
-mvn spring-boot:run -Dspring-boot.run.profiles=prod
+# 🔨 Build project
+mvn clean install
 
-# OR using the JAR file
-java -jar -Dspring.profiles.active=prod target/h2t-backside-0.0.1-SNAPSHOT.jar
-
-# API Speech to text
-docker run -d -p 9000:9000 -e ASR_MODEL=base -e ASR_ENGINE=openai_whisper onerahmet/openai-whisper-asr-webservice:latest
-
-# MinIO Server - store data
-docker run -p 9000:9000 -p 9001:9001 --name minio \
-  -v /path/to/minio/data:/data \
-  -e "MINIO_ROOT_USER=minioadmin" \
-  -e "MINIO_ROOT_PASSWORD=minioadmin" \
-  quay.io/minio/minio server /data --console-address ":9001"
+# ▶️ Chạy ứng dụng
+mvn spring-boot:run
 ```
 
-# Vosk scoring speech
-
-```bash
-docker run -d -p 5000:5000 trunghauad02/speech-scoring-api
-```
-
-## 📚 API Documentation
-
-API documentation can be generated and accessed using SpringDoc OpenAPI:
-
-1. Add the SpringDoc dependency to `pom.xml`:
-   ```xml
-   <dependency>
-       <groupId>org.springdoc</groupId>
-       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-       <version>2.3.0</version>
-   </dependency>
-   ```
-
-2. Configure in `application.properties`:
-   ```properties
-   springdoc.api-docs.path=/api-docs
-   springdoc.swagger-ui.path=/swagger-ui.html
-   ```
-
-3. Access the documentation at:
-   ```
-   http://localhost:8080/api/v1/swagger-ui.html
-   ```
-
-## 👨‍🎓 Team
+### ✅ 4. Kiểm tra kết nối
 
 <div align="center">
-<img src="https://cdn-icons-png.flaticon.com/512/3898/3898082.png" width="100" alt="Team">
 
-<h3>Developed by three students from K21 cohort at Ho Chi Minh City University of Technology and Education (HCMUTE)</h3>
+| Service | URL | Mô tả |
+|---------|-----|-------|
+| 📖 **API Documentation** | http://localhost:8080/swagger-ui.html | Tài liệu API tương tác |
+| 🗄️ **H2 Console** | http://localhost:8080/h2-console | Console database (nếu được bật) |
+| ❤️ **Health Check** | http://localhost:8080/actuator/health | Kiểm tra sức khỏe hệ thống |
 
- <table>
- <tr>
- <td align="center">
- <img src="https://avatars.githubusercontent.com/u/97101001?s=400&u=c2e995d2acff0cb120417bf042d6c1205bd4bbb4&v=4" width="100" alt="Developer Avatar">
- <br>
- <b>Nguyễn Trung Hậu</b>
- <br>
- <a href="https://github.com/TrungHauad02">GitHub</a>
- </td>
- <td align="center">
- <img src="https://avatars.githubusercontent.com/u/95125368" width="100" alt="Developer Avatar">
- <br>
- <b>Thái Thanh Hưng</b>
- <br>
- <a href="https://github.com/username2">GitHub</a>
- </td>
- <td align="center">
- <img src="https://avatars.githubusercontent.com/u/96189553" width="100" alt="Developer Avatar">
- <br>
- <b>Cáp Lê Hữu Tân</b>
- <br>
- <a href="https://github.com/username3">GitHub</a>
- </td>
- </tr>
- </table>
 </div>
 
+---
+
+## 🏗️ Cấu trúc dự án
+
+### 📁 Tổng quan cấu trúc thư mục
+
+```
+📦 src/
+├── 📂 main/
+│   ├── ☕ java/com/englishweb/h2t_backside/
+│   │   ├── 🚀 H2tBacksideApplication.java           # Main class khởi động ứng dụng
+│   │   │
+│   │   ├── ⚙️ config/                              # Cấu hình hệ thống
+│   │   │   └── 📁 MinioConfig.java                 # Cấu hình MinIO storage
+│   │   │
+│   │   ├── 🌐 controller/                          # REST API Controllers
+│   │   │   ├── 🤖 ai/                             # Controllers cho tính năng AI
+│   │   │   │   ├── 🗣️ ScoreSpeakingController.java # Chấm điểm bài nói
+│   │   │   │   └── 🔊 TextToSpeechController.java  # Text-to-Speech
+│   │   │   ├── 🔐 auth/                           # Controllers xác thực
+│   │   │   │   ├── 🎫 AuthenticateController.java # Đăng nhập/đăng xuất
+│   │   │   │   └── 👤 UserController.java         # Quản lý người dùng
+│   │   │   ├── ⭐ feature/                        # Controllers tính năng chính
+│   │   │   │   ├── 📊 AdminDashboardController.java # Dashboard admin
+│   │   │   │   └── 📁 MinioController.java        # Quản lý file
+│   │   │   ├── 📚 lesson/                         # Controllers nội dung học
+│   │   │   │   ├── 📝 GrammarController.java      # Bài học ngữ pháp
+│   │   │   │   └── 📖 VocabularyController.java   # Từ vựng
+│   │   │   └── 📊 test/                           # Controllers kiểm tra
+│   │   │       ├── 🏆 ToeicController.java        # Bài thi TOEIC
+│   │   │       └── 🥇 CompetitionTestController.java # Bài thi đấu
+│   │   │
+│   │   ├── 📋 dto/                                # Data Transfer Objects
+│   │   │   ├── 🤖 ai/                            # DTOs cho AI features
+│   │   │   │   ├── 🗣️ SpeakingScoreDTO.java      # Kết quả chấm điểm nói
+│   │   │   │   └── ✍️ WritingScoreDTO.java       # Kết quả chấm điểm viết
+│   │   │   ├── 📚 lesson/                        # DTOs nội dung học
+│   │   │   │   ├── 📝 GrammarDTO.java            # DTO bài học ngữ pháp
+│   │   │   │   └── 📖 VocabularyDTO.java         # DTO từ vựng
+│   │   │   ├── 🔍 filter/                        # DTOs cho filtering
+│   │   │   │   └── 📋 LessonFilterDTO.java       # Filter bài học
+│   │   │   └── 📤 response/                      # DTOs phản hồi
+│   │   │       └── 📨 ResponseDTO.java           # Response wrapper chung
+│   │   │
+│   │   ├── 🚨 exception/                          # Xử lý ngoại lệ
+│   │   │   ├── 🛡️ GlobalExceptionHandler.java    # Handler lỗi toàn cục
+│   │   │   └── 🔐 AuthenticateException.java     # Lỗi xác thực
+│   │   │
+│   │   ├── 🔄 mapper/                            # Object Mapping (MapStruct)
+│   │   │   ├── 📚 lesson/                        # Mappers cho lesson
+│   │   │   │   └── 📝 GrammarMapper.java         # Mapper Grammar entity <-> DTO
+│   │   │   └── 📊 test/                          # Mappers cho test
+│   │   │       └── 🏆 ToeicMapper.java           # Mapper TOEIC entity <-> DTO
+│   │   │
+│   │   ├── 🗃️ model/                             # Entities (JPA Models)
+│   │   │   ├── 🏷️ enummodel/                     # Enum definitions
+│   │   │   │   ├── 👤 RoleEnum.java              # Enum vai trò người dùng
+│   │   │   │   └── 📊 TestTypeEnum.java          # Enum loại bài kiểm tra
+│   │   │   ├── ⭐ features/                      # Core feature entities
+│   │   │   │   ├── 👤 User.java                  # Entity người dùng
+│   │   │   │   └── 🗺️ Route.java                 # Entity lộ trình học
+│   │   │   ├── 📚 lesson/                        # Learning content entities
+│   │   │   │   ├── 📝 Grammar.java               # Entity bài học ngữ pháp
+│   │   │   │   └── 📖 Vocabulary.java            # Entity từ vựng
+│   │   │   └── 📊 test/                          # Test entities
+│   │   │       ├── 🏆 Toeic.java                 # Entity bài thi TOEIC
+│   │   │       └── 🥇 CompetitionTest.java       # Entity bài thi đấu
+│   │   │
+│   │   ├── 🔍 repository/                        # Data Access Layer
+│   │   │   ├── 📚 lesson/                        # Repositories cho lesson
+│   │   │   │   └── 📝 GrammarRepository.java     # Repository bài học ngữ pháp
+│   │   │   ├── 📊 test/                          # Repositories cho test
+│   │   │   │   └── 🏆 ToeicRepository.java       # Repository TOEIC
+│   │   │   └── 🔍 specifications/                # JPA Specifications
+│   │   │       └── 📋 LessonSpecification.java   # Specs cho lesson queries
+│   │   │
+│   │   ├── 🔐 security/                          # Bảo mật và xác thực
+│   │   │   ├── 🎫 JwtUtil.java                   # Utilities JWT
+│   │   │   └── 🛡️ SecurityConfig.java            # Cấu hình Spring Security
+│   │   │
+│   │   ├── 💼 service/                           # Business Logic Layer
+│   │   │   ├── 🤖 ai/                           # Services cho AI features
+│   │   │   │   ├── 🗣️ ScoreSpeakingService.java # Logic chấm điểm nói
+│   │   │   │   └── 📁 impl/                     # Implementations
+│   │   │   ├── ⭐ feature/                      # Core feature services
+│   │   │   │   ├── 👤 UserService.java          # Logic quản lý người dùng
+│   │   │   │   └── 📁 impl/                     # Implementations
+│   │   │   ├── 📚 lesson/                       # Learning content services
+│   │   │   │   ├── 📝 GrammarService.java       # Logic bài học ngữ pháp
+│   │   │   │   └── 📁 impl/                     # Implementations
+│   │   │   └── 📊 test/                         # Test services
+│   │   │       ├── 🏆 ToeicService.java         # Logic bài thi TOEIC
+│   │   │       └── 📁 impl/                     # Implementations
+│   │   │
+│   │   └── 🛠️ utils/                            # Utilities và Helpers
+│   │       ├── 📄 LessonPagination.java         # Phân trang bài học
+│   │       └── ✅ ValidationData.java           # Validation utilities
+│   │
+│   └── 📦 resources/                            # Tài nguyên ứng dụng
+│       ├── ⚙️ application.properties            # Cấu hình ứng dụng
+│       └── 📚 wordnet/                         # WordNet dictionary data
+│           ├── 📝 data.noun                    # Danh từ
+│           └── 🔍 index.verb                   # Động từ
+│
+└── 🧪 test/                                    # Unit Tests
+    └── ☕ java/com/englishweb/h2t_backside/
+        └── 🧪 H2tBacksideApplicationTests.java # Test class chính
+```
+
+### 💡 Giải thích các package chính
+
+#### 🎯 **Controller Layer** (`controller/`)
+Chứa các REST API controllers được phân nhóm theo chức năng:
+- 🤖 **`ai/`** - Các endpoint AI như chấm điểm tự động, text-to-speech
+- 🔐 **`auth/`** - Xác thức, đăng nhập, quản lý người dùng
+- ⭐ **`feature/`** - Các tính năng chính như dashboard, file management
+- 📚 **`lesson/`** - Quản lý nội dung học tập (grammar, vocabulary, etc.)
+- 📊 **`test/`** - Quản lý bài kiểm tra và thi (TOEIC, competition)
+
+#### 📋 **DTO Layer** (`dto/`)
+Data Transfer Objects để truyền dữ liệu giữa các layer:
+- 🤖 **`ai/`** - DTOs cho AI responses và requests
+- 📚 **`lesson/`** - DTOs cho nội dung học tập
+- 🔍 **`filter/`** - DTOs cho filtering và searching
+- 📤 **`response/`** - DTOs cho API responses
+
+#### 🛡️ **Exception Handling** (`exception/`)
+Quản lý lỗi toàn hệ thống với các custom exceptions và global handler.
+
+#### 🔄 **Mapper Layer** (`mapper/`)
+Sử dụng MapStruct để convert giữa Entities và DTOs một cách tự động.
+
+#### 🗃️ **Model Layer** (`model/`)
+JPA Entities đại diện cho các bảng database:
+- 🏷️ **`enummodel/`** - Các enum definitions
+- ⭐ **`features/`** - Core entities (User, Route, etc.)
+- 📚 **`lesson/`** - Entities cho nội dung học tập
+- 📊 **`test/`** - Entities cho bài kiểm tra
+
+#### 🔍 **Repository Layer** (`repository/`)
+Data Access Layer với JPA Repositories và Specifications cho complex queries.
+
+#### 🔐 **Security Layer** (`security/`)
+Xử lý JWT authentication và Spring Security configuration.
+
+#### 💼 **Service Layer** (`service/`)
+Business Logic Layer được tổ chức theo pattern Interface + Implementation:
+- 🤖 **`ai/`** - Logic xử lý AI features
+- ⭐ **`feature/`** - Logic các tính năng chính
+- 📚 **`lesson/`** - Logic quản lý nội dung học
+- 📊 **`test/`** - Logic bài kiểm tra
+
+#### 🛠️ **Utils** (`utils/`)
+Các utility classes và helper functions cho pagination, validation, etc.
+
+### 🏛️ Kiến trúc tổng quan
+
+Dự án sử dụng **Layered Architecture** với các layer rõ ràng:
+
+<div align="left">
+
+```
+🌐 Controller ←→ 💼 Service ←→ 🔍 Repository ←→ 🗄️ Database
+      ↕             ↕
+    📋 DTO       🗃️ Entity/Model
+      ↕
+   🔄 Mapper
+```
+
+</div>
+
+1. 🌐 **Controller** nhận requests và trả về responses
+2. 💼 **Service** chứa business logic
+3. 🔍 **Repository** truy cập database
+4. 🔄 **Mapper** convert giữa DTO và Entity
+5. 🛡️ **Exception Handler** xử lý lỗi toàn hệ thống
+
+---
+
+## 📚 API Endpoints theo Controller
+
+### 🔐 Authentication Controller (`/api/auth`)
+- `POST /api/auth/login` - 🔑 Đăng nhập với email và mật khẩu
+- `POST /api/auth/login-with-google` - 🔍 Đăng nhập bằng Google OAuth
+- `POST /api/auth/logout` - 🚪 Đăng xuất khỏi hệ thống
+- `POST /api/auth/refresh-token` - 🔄 Làm mới access token
+- `GET /api/auth/validate-token` - ✅ Kiểm tra tính hợp lệ của token
+
+### 👤 User Controller (`/api/users`)
+- `GET /api/users` - 📋 Lấy danh sách người dùng (có phân trang và lọc)
+- `POST /api/users` - ➕ Tạo tài khoản người dùng mới
+- `GET /api/users/{id}` - 👀 Lấy thông tin chi tiết người dùng
+- `PUT /api/users/{id}` - ✏️ Cập nhật thông tin người dùng
+- `DELETE /api/users/{id}` - 🗑️ Xóa tài khoản người dùng
+- `GET /api/users/{userId}/process-by-route-id/{routeId}` - 📊 Lấy tiến độ học của user theo lộ trình
+- `GET /api/users/{userId}/complete-route-node/{routeNodeId}` - ✅ Hoàn thành một nút trong lộ trình
+
+### 🗂️ Topic Controller (`/api/topics`)
+- `GET /api/topics` - 📋 Lấy danh sách chủ đề học tập
+- `POST /api/topics` - ➕ Tạo chủ đề mới
+- `GET /api/topics/{id}` - 👀 Lấy thông tin chi tiết chủ đề
+- `PUT /api/topics/{id}` - ✏️ Cập nhật thông tin chủ đề
+- `DELETE /api/topics/{id}` - 🗑️ Xóa chủ đề
+- `GET /api/topics/{id}/verify` - ✅ Xác thực chủ đề
+- `GET /api/topics/questions` - ❓ Lấy câu hỏi theo chủ đề
+
+### 📖 Vocabulary Controller (`/api/vocabularies`)
+- `GET /api/vocabularies` - 📋 Lấy danh sách từ vựng theo chủ đề
+- `POST /api/vocabularies` - ➕ Thêm từ vựng mới
+- `GET /api/vocabularies/{id}` - 👀 Lấy thông tin chi tiết từ vựng
+- `PUT /api/vocabularies/{id}` - ✏️ Cập nhật từ vựng
+- `DELETE /api/vocabularies/{id}` - 🗑️ Xóa từ vựng
+
+### 📝 Grammar Controller (`/api/grammars`)
+- `GET /api/grammars` - 📋 Lấy danh sách bài học ngữ pháp
+- `POST /api/grammars` - ➕ Tạo bài học ngữ pháp mới
+- `GET /api/grammars/{id}` - 👀 Lấy chi tiết bài học ngữ pháp
+- `PUT /api/grammars/{id}` - ✏️ Cập nhật bài học ngữ pháp
+- `DELETE /api/grammars/{id}` - 🗑️ Xóa bài học ngữ pháp
+- `GET /api/grammars/{id}/verify` - ✅ Xác thực bài học ngữ pháp
+- `GET /api/grammars/questions` - ❓ Lấy câu hỏi ngữ pháp
+
+### 👂 Listening Controller (`/api/listenings`)
+- `GET /api/listenings` - 📋 Lấy danh sách bài học nghe
+- `POST /api/listenings` - ➕ Tạo bài học nghe mới
+- `GET /api/listenings/{id}` - 👀 Lấy chi tiết bài học nghe
+- `PUT /api/listenings/{id}` - ✏️ Cập nhật bài học nghe
+- `DELETE /api/listenings/{id}` - 🗑️ Xóa bài học nghe
+- `GET /api/listenings/{id}/verify` - ✅ Xác thực bài học nghe
+- `GET /api/listenings/questions` - ❓ Lấy câu hỏi theo bài nghe
+
+### 👁️ Reading Controller (`/api/readings`)
+- `GET /api/readings` - 📋 Lấy danh sách bài học đọc
+- `POST /api/readings` - ➕ Tạo bài học đọc mới
+- `GET /api/readings/{id}` - 👀 Lấy chi tiết bài học đọc
+- `PUT /api/readings/{id}` - ✏️ Cập nhật bài học đọc
+- `DELETE /api/readings/{id}` - 🗑️ Xóa bài học đọc
+- `GET /api/readings/{id}/verify` - ✅ Xác thực bài học đọc
+- `GET /api/readings/questions` - ❓ Lấy câu hỏi theo bài đọc
+
+### 🗣️ Speaking Controller (`/api/speakings`)
+- `GET /api/speakings` - 📋 Lấy danh sách bài học nói
+- `POST /api/speakings` - ➕ Tạo bài học nói mới
+- `GET /api/speakings/{id}` - 👀 Lấy chi tiết bài học nói
+- `PUT /api/speakings/{id}` - ✏️ Cập nhật bài học nói
+- `DELETE /api/speakings/{id}` - 🗑️ Xóa bài học nói
+- `GET /api/speakings/{id}/verify` - ✅ Xác thực bài học nói
+
+### ✍️ Writing Controller (`/api/writings`)
+- `GET /api/writings` - 📋 Lấy danh sách bài học viết
+- `POST /api/writings` - ➕ Tạo bài học viết mới
+- `GET /api/writings/{id}` - 👀 Lấy chi tiết bài học viết
+- `PUT /api/writings/{id}` - ✏️ Cập nhật bài học viết
+- `DELETE /api/writings/{id}` - 🗑️ Xóa bài học viết
+- `GET /api/writings/{id}/verify` - ✅ Xác thực bài học viết
+
+### 📊 Test Controller (`/api/tests`)
+- `GET /api/tests` - 📋 Lấy danh sách bài kiểm tra
+- `POST /api/tests` - ➕ Tạo bài kiểm tra mới
+- `GET /api/tests/{id}` - 👀 Lấy chi tiết bài kiểm tra
+- `PUT /api/tests/{id}` - ✏️ Cập nhật bài kiểm tra
+- `DELETE /api/tests/{id}` - 🗑️ Xóa bài kiểm tra
+- `GET /api/tests/{id}/verify` - ✅ Xác thực bài kiểm tra
+
+### 📈 TOEIC Controller (`/api/toeic`)
+- `GET /api/toeic` - 📋 Lấy danh sách đề thi TOEIC
+- `POST /api/toeic` - ➕ Tạo đề thi TOEIC mới
+- `GET /api/toeic/{id}` - 👀 Lấy chi tiết đề thi TOEIC
+- `PUT /api/toeic/{id}` - ✏️ Cập nhật đề thi TOEIC
+- `DELETE /api/toeic/{id}` - 🗑️ Xóa đề thi TOEIC
+- `GET /api/toeic/{id}/verify` - ✅ Xác thực đề thi TOEIC
+
+### 🏆 Competition Test Controller (`/api/competition-tests`)
+- `GET /api/competition-tests` - 📋 Lấy danh sách cuộc thi
+- `POST /api/competition-tests` - ➕ Tạo cuộc thi mới
+- `GET /api/competition-tests/{id}` - 👀 Lấy chi tiết cuộc thi
+- `PUT /api/competition-tests/{id}` - ✏️ Cập nhật cuộc thi
+- `DELETE /api/competition-tests/{id}` - 🗑️ Xóa cuộc thi
+- `GET /api/competition-tests/{id}/verify` - ✅ Xác thực cuộc thi
+
+### 🛣️ Route Controller (`/api/routes`)
+- `GET /api/routes` - 📋 Lấy danh sách lộ trình học
+- `POST /api/routes` - ➕ Tạo lộ trình học mới
+- `GET /api/routes/{id}` - 👀 Lấy chi tiết lộ trình học
+- `PUT /api/routes/{id}` - ✏️ Cập nhật lộ trình học
+- `DELETE /api/routes/{id}` - 🗑️ Xóa lộ trình học
+- `GET /api/routes/{id}/verify` - ✅ Xác thực lộ trình học
+- `GET /api/routes/longest` - 📏 Lấy lộ trình dài nhất
+
+### 🤖 AI Features Controllers
+
+#### 🔊 Text-to-Speech Controller (`/api/text-to-speech`)
+- `POST /api/text-to-speech` - 🗣️ Chuyển đổi văn bản thành giọng nói
+- `GET /api/text-to-speech/voices` - 🎤 Lấy danh sách giọng nói có sẵn
+
+#### ✍️ Score Writing Controller (`/api/score-writing`)
+- `POST /api/score-writing` - 📝 Chấm điểm bài viết sử dụng AI
+
+#### 🗣️ Score Speaking Controller (`/api/score-speaking`)
+- `POST /api/score-speaking` - 🎤 Chấm điểm bài nói sử dụng AI
+- `POST /api/score-speaking/speech-in-topic` - 💬 Chấm điểm nói theo chủ đề
+- `POST /api/score-speaking/multiple` - 🎵 Chấm điểm nhiều file âm thanh
+
+#### 🧠 LLM Controller (`/api/llm`)
+- `POST /api/llm` - 💭 Gửi prompt đến AI model và nhận phản hồi
+
+#### 🤖 AI Response Controller (`/api/ai-response`)
+- `GET /api/ai-response` - 📋 Lấy danh sách phản hồi AI
+- `GET /api/ai-response/teacher-view` - 👨‍🏫 Xem phản hồi AI dành cho giáo viên
+- `GET /api/ai-response/{id}` - 👀 Lấy chi tiết phản hồi AI
+- `PUT /api/ai-response/{id}` - ✏️ Cập nhật đánh giá phản hồi AI
+
+### 📊 Dashboard Controllers
+
+#### 👨‍💼 Admin Dashboard (`/api/admin/dashboard`)
+- `GET /api/admin/dashboard` - 📈 Lấy thống kê tổng quan cho admin
+
+#### 👨‍🏫 Teacher Dashboard (`/api/teacher-dashboard`)
+- `GET /api/teacher-dashboard` - 📊 Lấy thống kê cho giáo viên
+
+#### 👨‍🔬 Teacher Advance Dashboard (`/api/teacher-advance/dashboard`)
+- `GET /api/teacher-advance/dashboard` - 📈 Lấy thống kê cho giáo viên nâng cao
+
+### 📧 Email Controller (`/api/email`)
+- `POST /api/email/send-otp` - 📤 Gửi mã OTP qua email
+- `POST /api/email/verify-otp` - ✅ Xác thực mã OTP
+- `POST /api/email/reset-password` - 🔄 Đặt lại mật khẩu
+
+### 📁 MinIO Controller (`/api/minio`)
+- `POST /api/minio` - 📤 Upload file lên MinIO storage
+- `GET /api/minio/{objectName}` - 📥 Download file từ MinIO
+- `DELETE /api/minio` - 🗑️ Xóa file khỏi MinIO
+
+### 🏠 Home Controller (`/api/home`)
+- `GET /api/home/hero-info` - 📊 Lấy thông tin thống kê trang chủ
+- `GET /api/home/quotes` - 💬 Lấy câu quote ngẫu nhiên
+- `GET /api/home/feature-lesson/most-viewed` - 👀 Lấy bài học được xem nhiều nhất
+- `GET /api/home/feature-lesson/most-recent` - 🆕 Lấy bài học mới nhất
+- `GET /api/home/routes/recent` - 🗺️ Lấy lộ trình mới nhất
+- `GET /api/home/routes/longest` - 📏 Lấy lộ trình dài nhất
+- `GET /api/home/tests/recent` - 📊 Lấy bài kiểm tra mới nhất
+- `GET /api/home/toeic/recent` - 🏆 Lấy đề TOEIC mới nhất
+- `GET /api/home/competition-tests/recent` - 🥇 Lấy cuộc thi mới nhất
+
+### 📝 Submit Controllers (Nộp bài)
+- **Submit Test** (`/api/submit-tests`) - 📤 Quản lý việc nộp bài kiểm tra
+- **Submit TOEIC** (`/api/submit-toeic`) - 🏆 Quản lý việc nộp bài TOEIC
+- **Submit Competition** (`/api/submit-competitions`) - 🥇 Quản lý việc nộp bài thi đấu
+
+### 📋 Error Log Controller (`/api/error-logs`)
+- `GET /api/error-logs` - 📋 Lấy danh sách error logs
+- `GET /api/error-logs/{id}` - 👀 Lấy chi tiết error log
+- `DELETE /api/error-logs/{id}` - 🗑️ Xóa error log
+- `DELETE /api/error-logs/bulk` - 🗑️ Xóa nhiều error logs
+
+---
+
+## 🔒 Xác thực và Phân quyền
+
+### 🎫 Cấu trúc JWT Token
+
 <div align="center">
- <hr>
 
- <p>
- <a href="#"><img src="https://img.shields.io/badge/H2T_English-Website-teal?style=for-the-badge" alt="Website"></a>
- <a href="mailto:contact@h2tenglish.com"><img src="https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail" alt="Contact"></a>
- <a href="#"><img src="https://img.shields.io/badge/Report-Issues-yellow?style=for-the-badge&logo=github" alt="Issues"></a>
- </p>
+| Token Type | ⏰ Thời gian | 📋 Claims | 🎯 Sử dụng |
+|------------|-------------|----------|------------|
+| 🔑 **Access Token** | 24 giờ | id, email, role, token_type | Xác thực API |
+| 🔄 **Refresh Token** | 30 ngày | id, email, is_refresh, token_type | Làm mới token |
 
- <p>© 2025 H2T English. All Rights Reserved.</p>
+</div>
 
- <p>
- <img src="https://img.shields.io/badge/Made_with_❤️_in-Vietnam-red?style=flat-square&logo=vietnam" alt="Made in Vietnam">
- </p>
+### 🛡️ Cấu hình bảo mật
+
+- 🌐 **Public Endpoints:** Xác thực, xác minh email, trang chủ
+- 🔐 **Protected Endpoints:** Tất cả `/api/**` trừ public endpoints
+- 🌏 **CORS:** Được cấu hình cho `http://localhost:3000`
+- ✅ **JWT Validation:** Tự động kiểm tra token với phân quyền theo vai trò
+
+### 👥 Kiểm soát truy cập theo vai trò
+
+```java
+// 🔴 Ví dụ: Chỉ ADMIN mới có thể quản lý người dùng
+@PreAuthorize("hasRole('ADMIN')")
+public ResponseEntity<PageUserDTO> getUsers() { ... }
+
+// 🟡 Ví dụ: TEACHER trở lên có thể quản lý bài học
+@PreAuthorize("hasAnyRole('TEACHER', 'TEACHER_ADVANCE', 'ADMIN')")
+public ResponseEntity<LessonDTO> createLesson() { ... }
+```
+
+---
+
+## 🛡️ Hệ thống xử lý lỗi
+
+### 🚨 Quản lý lỗi toàn diện
+
+#### 🎯 Global Exception Handler
+- ❌ **Lỗi Validation** - MethodArgumentNotValidException
+- 🔍 **Không tìm thấy tài nguyên** - ResourceNotFoundException
+- 🔐 **Lỗi xác thực** - AuthenticateException
+- 🌐 **Lỗi API bên ngoài** - OpenRouterException, SpeechProcessingException
+- 📁 **Lỗi xử lý file** - IOException, JsonProcessingException
+
+#### 📝 Ghi log lỗi & Thông báo
+```java
+@ExceptionHandler(Exception.class)
+public ResponseDTO<String> handleException(Exception ex, HttpServletRequest request) {
+    // 📋 Tạo log lỗi chi tiết
+    ErrorDTO errorDTO = ErrorDTO.builder()
+        .message("Mô tả lỗi")
+        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .detail(ex.getMessage())
+        .instance(request.getMethod() + " " + request.getRequestURI())
+        .timestamp(LocalDateTime.now())
+        .errorCode(ErrorApiCodeContent.UNEXPECTED_ERROR)
+        .severity(SeverityEnum.HIGH)
+        .build();
+    
+    // 🚨 Gửi thông báo đến Discord
+    discordNotifier.buildErrorAndSend(errorDTO);
+    
+    return ResponseDTO.fail("Có lỗi xảy ra", ex.getMessage());
+}
+```
+
+#### 🚦 Mức độ nghiêm trọng của lỗi
+
+<div align="center">
+
+| Mức độ | Icon | Mô tả |
+|--------|------|-------|
+| 🟢 **LOW** | ⚠️ | Lỗi validation, vấn đề nhỏ |
+| 🟡 **MEDIUM** | ⚠️ | Lỗi business logic, lỗi xử lý dữ liệu |
+| 🔴 **HIGH** | 🚨 | Lỗi hệ thống, vấn đề bảo mật, lỗi API bên ngoài |
+
+</div>
+
+#### 💬 Tích hợp Discord
+Thông báo lỗi tự động được gửi đến Discord webhook bao gồm:
+- 📝 Chi tiết lỗi và stack trace
+- 🌐 Thông tin request (method, URI, parameters)
+- 👤 Context người dùng và thời gian
+- 🚦 Mức độ nghiêm trọng và mã lỗi
+
+---
+
+## 🗄️ Cấu trúc Database
+
+### 📊 Các bảng chính (Tổng cộng 52 bảng)
+
+#### 👤 Quản lý người dùng
+- 👥 `users` - Tài khoản và hồ sơ người dùng
+- 📈 `process` - Theo dõi tiến độ học tập
+
+#### 📚 Nội dung học tập
+- 🗂️ `topic` - Chủ đề học tập
+- 📖 `vocabulary` - Định nghĩa và ví dụ từ vựng
+- 📝 `grammar` - Quy tắc và bài tập ngữ pháp
+- 👁️ `reading` - Tài liệu đọc hiểu
+- 👂 `listening` - Bài học dựa trên âm thanh
+- 🗣️ `speaking` - Phiên luyện nói
+- ✍️ `writing` - Bài tập viết
+
+#### 📊 Hệ thống đánh giá
+- 📋 `test` - Cấu trúc bài kiểm tra chung
+- 👁️ `test_reading`, 👂 `test_listening`, 🗣️ `test_speaking`, ✍️ `test_writing` - Kiểm tra theo kỹ năng
+- 🏆 `toeic` - Quản lý bài thi TOEIC
+- 📊 `toeic_part1` đến `toeic_part7` - Các phần của bài thi TOEIC
+- 🥇 `competition_test` - Đánh giá thi đấu
+
+#### 📝 Theo dõi bài nộp
+- 📤 `submit_test` - Bài kiểm tra đã nộp
+- 🏆 `submit_toeic` - Bài TOEIC đã nộp
+- 🥇 `submit_competition` - Bài thi đấu đã nộp
+- 📋 Các bảng câu trả lời liên quan để theo dõi chi tiết
+
+#### ⚙️ Quản lý hệ thống
+- 🚨 `error_log` - Theo dõi lỗi hệ thống
+- 🤖 `airesponse` - Quản lý phản hồi AI
+
+### ⚙️ Cấu hình Database
+```properties
+# 🐬 MySQL 8 với cấu hình tối ưu
+spring.datasource.url=jdbc:mysql://localhost:3307/study-english
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+```
+
+---
+
+## 📈 Hiệu suất và Khả năng mở rộng
+
+### 📤 Cấu hình File Upload
+```properties
+spring.servlet.multipart.max-file-size=50MB
+spring.servlet.multipart.max-request-size=50MB
+server.tomcat.connection-timeout=300000ms
+server.tomcat.max-http-form-post-size=50MB
+```
+
+### ⚡ Cấu hình Async
+```properties
+spring.mvc.async.request-timeout=300000
+server.undertow.io-threads=4
+server.undertow.worker-threads=20
+```
+
+---
+
+## 🧪 Testing và Documentation
+
+### 📖 Tài liệu API
+- 📚 **Swagger UI:** Có sẵn tại `/swagger-ui.html`
+- 📋 **OpenAPI 3.0:** Tài liệu API toàn diện
+- 🧪 **Testing tương tác:** Test endpoints trực tiếp từ trình duyệt
+
+### 🛠️ Công cụ phát triển
+- 🔄 **Spring Boot DevTools** - Hot reload trong quá trình phát triển
+- 🗃️ **H2 Console** - Kiểm tra database (chỉ development)
+- 📝 **Logging** - Logging toàn diện với các mức độ khác nhau
+
+---
+
+## 🤝 Đóng góp
+
+### 🔄 Quy trình phát triển
+1. 🍴 Fork repository
+2. 🌿 Tạo feature branch
+3. ✏️ Thực hiện thay đổi
+4. 🧪 Viết tests cho tính năng mới
+5. 📤 Submit pull request
+
+### 📏 Chuẩn code
+- ✅ Tuân theo best practices của Spring Boot
+- 🛡️ Sử dụng xử lý lỗi phù hợp
+- 📖 Tài liệu hóa API endpoints mới
+- 📊 Duy trì test coverage
+
+---
+
+## 📞 Hỗ trợ và Liên hệ
+
+<div align="center">
+
+| 📧 **Email** | 🏫 **Trường** | 🎓 **Khoa** |
+|-------------|---------------|-------------|
+| 21110434@student.hcmute.edu.vn | Đại học Sư phạm Kỹ thuật TP.HCM | Công nghệ Thông tin |
+| (Trưởng nhóm) | (HCMUTE) | |
+
+</div>
+
+---
+
+## 📝 Giấy phép
+
+Dự án này là một phần của luận văn tốt nghiệp và được dự định cho mục đích giáo dục.
+
+---
+
+<div align="center">
+
+### 🎓 **H2T-English Backend** 🚀
+**Được phát triển với ❤️ bởi sinh viên HCMUTE**
+
+<img src="https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge" alt="Made with Love"/>
+<img src="https://img.shields.io/badge/HCMUTE-2024-blue?style=for-the-badge" alt="HCMUTE 2024"/>
+
 </div>
